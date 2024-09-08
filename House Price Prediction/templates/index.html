@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+    <style>
+       body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #10c7e3;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: rgb(205, 234, 204);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 16px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            border: none;
+            width: 100%;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            opacity: 0.8;
+        }
+        .alert {
+            color: rgb(235, 17, 17);
+        }
+        h1 {
+            text-align: center;
+            color: #333333;
+        }
+        h2 {
+            text-align: center;
+            color: #000000;
+        }
+      
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>House Price Prediction</h1>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class="alert">
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        <form action="/predict" method="post">
+            <label for="Location">Location:</label>
+            <select name="Location" required>
+                <option value="Chennai">Chennai</option>
+                <option value="Cuddalore">Cuddalore</option>
+                <option value="Pondicherry">Pondicherry</option>
+                <option value="Madurai">Madurai</option>
+                <option value="Virudhunagar">Virudhunagar</option>
+                <option value="Coimbatore">Coimbatore</option>
+                <option value="Erode">Erode</option>
+                <option value="Salem">Salem</option>
+            </select>
+
+            <label for="Area">Area (in sq ft):</label>
+            <input type="number" step="any" name="Area" placeholder="Enter area" required>
+
+            <label for="No. of Bedrooms">No. of Bedrooms:</label>
+            <input type="number" step="any" name="No. of Bedrooms" placeholder="Enter number of bedrooms" required>
+
+            <label for="New/Resale">New/Resale (0 for Resale, 1 for New):</label>
+            <input type="number" step="any" name="New/Resale" placeholder="Enter 0 or 1" required>
+
+            <label for="Lift Available">Lift Available (0 for No , 1 for Yes):</label>
+            <input type="number" step="any" name="Lift Available" placeholder="Enter 0 or 1" required>
+
+            <label for="Car Parking">Car Parking (0 for No , 1 for Yes):</label>
+            <input type="number" step="any" name="Car Parking" placeholder="Enter 0 or 1" required>
+
+            <label for="24x7 Security">24x7 Security (0 for No , 1 for Yes):</label>
+            <input type="number" step="any" name="24x7 Security" placeholder="Enter 0 or 1" required>
+
+            <label for="Children's Play Area">Children's Play Area (0 for No , 1 for Yes):</label>
+            <input type="number" step="any" name="Children's Play Area" placeholder="Enter 0 or 1" required>
+
+
+            <label for="Landscaped Gardens">Landscaped Gardens (0 for No , 1 for Yes):</label>
+            <input type="number" step="any" name="Landscaped Gardens" placeholder="Enter 0 or 1" required>
+
+            <label for="Gas Connection">Gas Connection (0 for No , 1 for Yes):</label>
+            <input type="number" step="any" name="Gas Connection" placeholder="Enter 0 or 1" required>
+
+            <label for="Swimming Pool">Swimming Pool (0 for No , 1 for Yes):</label>
+            <input type="number" step="any" name="Swimming Pool" placeholder="Enter 0 or 1" required>
+
+            <input type="submit" value="Predict">
+        </form>
+        {% if prediction_text %}
+            <h2>{{ prediction_text }}</h2>
+        {% endif %}
+    </div>
+</body>
+</html>
